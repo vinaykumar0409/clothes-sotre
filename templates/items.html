@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        .total {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Clothes Store</h1>
+        </header>
+       
+                    <!-- 12 women's clothing items with add to cart buttons -->
+            <div class="item">
+                <img src="static/img/apple.jpg" alt="Dress" class="item-image">
+                <h3>Dress</h3>
+                <p>$200</p>
+                <label for="quantity1">Quantity:</label>
+                <input type="number" id="quantity1" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('Dress', 200, quantity1.value)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="static/img/banana.jpg" alt="Skirt" class="item-image">
+                <h3>Skirt</h3>
+                <p>$150</p>
+                <label for="quantity2">Quantity:</label>
+                <input type="number" id="quantity2" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('Skirt', 150, quantity2.value)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="static/img/Carrot.jpg" alt="Blouse" class="item-image">
+                <h3>Blouse</h3>
+                <p>$180</p>
+                <label for="quantity3">Quantity:</label>
+                <input type="number" id="quantity3" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('Blouse', 180, quantity3.value)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="static/img/cucumber.jpg" alt="Jeans" class="item-image">
+                <h3>Jeans</h3>
+                <p>$120</p>
+                <label for="quantity4">Quantity:</label>
+                <input type="number" id="quantity4" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('Jeans', 120, quantity4.value)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="static/img/grapes.jpg" alt="T-Shirt" class="item-image">
+                <h3>T-Shirt</h3>
+                <p>$100</p>
+                <label for="quantity5">Quantity:</label>
+                <input type="number" id="quantity5" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('T-Shirt', 100, quantity5.value)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="static/img/lemon.jpg" alt="Jacket" class="item-image">
+                <h3>Jacket</h3>
+                <p>$80</p>
+                <label for="quantity6">Quantity:</label>
+                <input type="number" id="quantity6" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('Jacket', 80, quantity6.value)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="static/img/onion.jpg" alt="Sweater" class="item-image">
+                <h3>Sweater</h3>
+                <p>$300</p>
+                <label for="quantity7">Quantity:</label>
+                <input type="number" id="quantity7" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('Sweater', 300, quantity7.value)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="static/img/orange.jpg" alt="Coat" class="item-image">
+                <h3>Coat</h3>
+                <p>$110</p>
+                <label for="quantity8">Quantity:</label>
+                <input type="number" id="quantity8" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('Coat', 110, quantity8.value)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="static/img/pepper.jpg" alt="Shorts" class="item-image">
+                <h3>Shorts</h3>
+                <p>$220</p>
+                <label for="quantity9">Quantity:</label>
+                <input type="number" id="quantity9" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('Shorts', 220, quantity9.value)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="static/img/potato.jpg" alt="Leggings" class="item-image">
+                <h3>Leggings</h3>
+                <p>$100</p>
+                <label for="quantity10">Quantity:</label>
+                <input type="number" id="quantity10" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('Leggings', 100, quantity10.value)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="static/img/spinach.jpg" alt="Romper" class="item-image">
+                <h3>Romper</h3>
+                <p>$150</p>
+                <label for="quantity11">Quantity:</label>
+                <input type="number" id="quantity11" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('Romper', 150, quantity11.value)">Add to Cart</button>
+            </div>
+            <div class="item">
+                <img src="static/img/organic.jpg" alt="Activewear" class="item-image">
+                <h3>Activewear</h3>
+                <p>$90</p>
+                <label for="quantity12">Quantity:</label>
+                <input type="number" id="quantity12" name="quantity" min="1" value="1">
+                <button type="button" onclick="addToCart('Activewear', 90, quantity12.value)">Add to Cart</button>
+            </div>
+<!-- Cart Table Display -->
+<div id="cart-section">
+    <h2>Your Cart</h2>
+    <table class="table" id="cart-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="cart-items">
+            <!-- Cart items will be dynamically inserted here -->
+        </tbody>
+    </table>
+    <h3 id="total-amount">Total Amount: $0</h3>
+</div>
+
+<!-- Checkout Section -->
+<h2>Checkout</h2>
+<form id="checkout-form">
+    <label for="address">Select Delivery Address:</label>
+    <select id="address" name="address">
+        <option value="Default Address">Default Address (Registered)</option>
+        <option value="new">New Address</option>
+    </select>
+    <input type="text" id="new-address" name="new_address" placeholder="Enter new address" style="display: none;">
+    
+    <label for="payment-method">Payment Method:</label>
+    <select id="payment-method" name="payment_method">
+        <option value="COD">Cash on Delivery</option>
+    </select>
+
+    <button type="button" id="place-order">Place Order</button>
+</form>
+
+<script>
+    // Example JavaScript for dynamically adding items to the cart and updating the total
+    let cart = [];
+    let total = 0;
+
+    function addToCart(itemName, price, quantity) {
+        let item = {
+            name: itemName,
+            price: parseFloat(price),
+            quantity: parseInt(quantity),
+            total: price * quantity
+        };
+        cart.push(item);
+        updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+        let cartTable = document.getElementById('cart-items');
+        cartTable.innerHTML = '';  // Clear current items
+
+        total = 0;  // Reset total amount
+        cart.forEach(item => {
+            let row = `<tr>
+                            <td>${item.name}</td>
+                            <td>${item.quantity}</td>
+                            <td>$${item.price.toFixed(2)}</td>
+                            <td>$${item.total.toFixed(2)}</td>
+                       </tr>`;
+            cartTable.innerHTML += row;
+
+            total += item.total;  // Update total amount
+        });
+
+        // Display total amount
+        document.getElementById('total-amount').innerText = `Total Amount: $${total.toFixed(2)}`;
+    }
+
+    // Handle the visibility of the new address field
+    document.getElementById('place-order').addEventListener('click', function() {
+    let address = document.getElementById('address').value === 'new' ? document.getElementById('new-address').value : 'Default Address';
+    let paymentMethod = document.getElementById('payment-method').value;
+
+    // Send the data to the backend
+    fetch('/place_order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            address: address,
+            items: cart,  // Ensure the cart items are passed
+            total_price: total,
+            payment_method: paymentMethod
+        })
+    }).then(response => response.json()).then(data => {
+        if (data.success) {
+            alert('Thank you for ordering! Your items will be delivered at your doorstep.');
+            window.location.href = '/user_dashboard';  // Redirect to user dashboard after placing order
+        } else {
+            alert('Error placing order. Please try again.');
+        }
+    }).catch(error => {
+        console.error('Error:', error);
+        alert('Error placing order. Please try again.');
+    });
+});
+
+</script>
+
+</body>
+</html>

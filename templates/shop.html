@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        /* Style for container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Style for header */
+        header {
+            background-image: url('/static/img/hero.jpeg'); /* Add a background image */
+            background-size: cover;
+            background-position: center;
+            padding: 50px;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Style for the navigation menu */
+        nav.main-menu ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        nav.main-menu ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav.main-menu ul li a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #333;
+            padding: 10px 20px;
+            border: 2px solid #38b2ac;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav.main-menu ul li a:hover {
+            background-color: #38b2ac;
+            color: white;
+        }
+
+        /* Style for the content section */
+        .content {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2c7a7b;
+        }
+
+        /* Button styles */
+        .button {
+            display: inline-block;
+            background-color: #38b2ac;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2a9d8f;
+            transform: scale(1.05);
+        }
+
+        /* Style for flash messages */
+        .flash-messages {
+            margin-top: 20px;
+            text-align: center;
+            background-color: #c3ffd0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to the Shop</h1>
+        </header>
+
+        <!-- Navigation Menu -->
+        <nav class="main-menu">
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+
+        <!-- Content Section -->
+        <div class="content">
+            <h2>Shop Options</h2>
+            <a href="/items" class="button">Browse Items</a>
+            <a href="/user_dashboard" class="button">User Dashboard</a>
+        </div>
+
+        <!-- Flash Messages Section -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

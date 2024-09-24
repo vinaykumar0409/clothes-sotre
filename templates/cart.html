@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Your Cart</h1>
+        </header>
+        <nav class="main-menu">
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/user_dashboard">Dashboard</a></li>
+            </ul>
+        </nav>
+
+        <!-- Cart Table Section -->
+        <div class="cart-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="cartItems">
+                    <!-- Items will be dynamically inserted here -->
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.price }}</td>
+                        <td>${{ (item.price * item.quantity)|round(2) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h3>Total Price: $<span id="totalPrice">{{ total_price|round(2) }}</span></h3>
+        </div>
+
+        <div class="checkout">
+            <h3>Select Delivery Address:</h3>
+            <select id="deliveryAddress" onchange="toggleNewAddress()">
+                <option value="default">Default Address (Registered)</option>
+                <option value="new">New Address</option>
+            </select>
+            <div id="newAddressContainer" style="display: none;">
+                <label for="newAddress">Enter New Address:</label>
+                <input type="text" id="newAddress">
+            </div>
+            <h3>Select Payment Option:</h3>
+            <select>
+                <option value="cod">Cash on Delivery</option>
+            </select>
+            <button type="button" onclick="placeOrder()">Place Order</button>
+        </div>
+        <div class="confirmation-message" id="confirmationMessage" style="display: none;">
+            <h3>Thank you for shopping! Fresh items will be dropped at your doorstep.</h3>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleNewAddress() {
+            const addressDropdown = document.getElementById("deliveryAddress");
+            const newAddressContainer = document.getElementById("newAddressContainer");
+            if (addressDropdown.value === "new") {
+                newAddressContainer.style.display = "block";
+            } else {
+                newAddressContainer.style.display = "none";
+            }
+        }
+
+        function placeOrder() {
+            // Send order data to server for processing
+            fetch('/place_order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    address: document.getElementById('deliveryAddress').value === 'new' ? document.getElementById('newAddress').value : 'default',
+                    items: JSON.parse('{{ cart_items | tojson | safe }}'),
+                    total_price: parseFloat(document.getElementById('totalPrice').textContent)
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('confirmationMessage').style.display = 'block';
+                } else {
+                    alert('Failed to place order. Please try again.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  
+</body>
+</html>

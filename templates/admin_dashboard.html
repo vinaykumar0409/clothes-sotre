@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="admin-section">
+        <h2>Manage Orders</h2>
+
+        <!-- Notification area for updates -->
+        <div id="notification" class="notification"></div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User</th>
+                    <th>Items</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Update Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.user_name }}</td>
+                    <td>{{ order.items }}</td> <!-- Items now displayed correctly -->
+                    <td>${{ order.total_price }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>
+                        <select onchange="updateOrderStatus({{ order.id }}, this.value)">
+                            <option value="Yet to Ship" {% if order.status == "Yet to Ship" %}selected{% endif %}>Yet to Ship</option>
+                            <option value="Shipped" {% if order.status == "Shipped" %}selected{% endif %}>Shipped</option>
+                            <option value="On the Way" {% if order.status == "On the Way" %}selected{% endif %}>On the Way</option>
+                            <option value="Delivered" {% if order.status == "Delivered" %}selected{% endif %}>Delivered</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        // Function to update order status
+        function updateOrderStatus(orderId, status) {
+            fetch('/update_order_status', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ order_id: orderId, status: status })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message and dynamically update without page reload
+                    document.getElementById('notification').innerText = `Order ${orderId} status updated to ${status}`;
+                    document.getElementById('notification').style.color = 'green';
+                } else {
+                    // Show error message
+                    document.getElementById('notification').innerText = 'Failed to update order status.';
+                    document.getElementById('notification').style.color = 'red';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('notification').innerText = 'An error occurred while updating the order.';
+                document.getElementById('notification').style.color = 'red';
+            });
+        }
+    </script>
+      
+</body>
+</html>
